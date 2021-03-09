@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class SwiftSolver {
+class SwiftSolver: ObservableObject {
     // Initial Value
     var alpha: Double, beta: Double;
     var m1: Double, m2: Double, w1: Double, w2: Double, l1: Double, l2: Double;
@@ -47,5 +47,19 @@ class SwiftSolver {
     
     func get_position() -> (CGPoint, CGPoint) {
         return (CGPoint(x: solver_get_x1(), y: solver_get_y1()), CGPoint(x: solver_get_x2(), y: solver_get_y2()))
+    }
+    
+    func set_value(alpha: Double, beta: Double, m1: Double, m2: Double, w1: Double, w2: Double, l1: Double, l2: Double) {
+        self.alpha = alpha
+        self.beta = beta
+        self.m1 = m1
+        self.m2 = m2
+        self.w1 = w1
+        self.w2 = w2
+        self.l1 = l1
+        self.l2 = l2
+        
+        // Set CPP Class
+        solver_set_data(alpha, beta, m1, m2, l1, l2, w1, w2)
     }
 }

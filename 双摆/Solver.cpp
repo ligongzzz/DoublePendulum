@@ -234,8 +234,8 @@ extern "C"
         delete &solver;
     }
 
-    void solver_set_data(double alpha, double beta, double m1, double m2, double l1, double l2, double w1, double w2, double a1, double a2)
+    void solver_set_data(double alpha, double beta, double m1, double m2, double l1, double l2, double w1, double w2)
     {
-        solver.set_data(alpha, beta, m1, m2, l1, l2, w1, w2, a1, a2);
+        solver = Solver(alpha, beta, m1, m2, l1, l2, w1, w2);
     }
 }

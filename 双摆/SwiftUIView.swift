@@ -8,7 +8,7 @@
 import SwiftUI
 import SpriteKit
 
-class AnimateScene: SKScene {
+class AnimateScene: SKScene, ObservableObject {
     var lastUpdateTime: TimeInterval?
     var line1 = SKShapeNode()
     var line2 = SKShapeNode()
@@ -18,6 +18,10 @@ class AnimateScene: SKScene {
     var firstBox = SKShapeNode()
     var secondBox = SKShapeNode()
     var zoom: CGFloat = 100.0
+    
+    func updateSolver(newSolver: SwiftSolver) {
+        swiftSolver.set_value(alpha: newSolver.alpha, beta: newSolver.beta, m1: newSolver.m1, m2: newSolver.m2, w1: newSolver.w1, w2: newSolver.w2, l1: newSolver.l1, l2: newSolver.l2)
+    }
     
     private func drawLine(line: inout SKShapeNode, from: CGPoint, to: CGPoint){
         line.removeFromParent()
@@ -108,11 +112,11 @@ class AnimateScene: SKScene {
     }
 }
 
-struct SwiftUIView: View {
-    @Binding var swiftSolver: SwiftSolver
+struct SwiftUIView: View{
+    @ObservedObject var swiftSolver: SwiftSolver
     @Binding var active: Bool
     @Binding var zoom: Double
-    @State var spriteScene = AnimateScene(swiftSolver: SwiftSolver())
+    @StateObject var spriteScene = AnimateScene(swiftSolver: SwiftSolver())
     
     func sizableScene(width: CGFloat, height: CGFloat) -> SKScene {
         let scene = AnimateScene(swiftSolver: swiftSolver)
@@ -126,7 +130,7 @@ struct SwiftUIView: View {
         GeometryReader(content: { geometry in
             SpriteView(scene: spriteScene)
                 .onAppear(perform: {
-                    spriteScene.swiftSolver = swiftSolver
+                    spriteScene.updateSolver(newSolver: swiftSolver)
                     spriteScene.zoom = CGFloat(zoom)
                     spriteScene.size = CGSize(width: geometry.size.width, height: geometry.size.height)
                 })
