@@ -17,9 +17,9 @@ class SwiftSolver {
         alpha = 0.0
         beta = 0.0
         m1 = 1.0
-        m2 = 5.0
-        w1 = 0.01
-        w2 = 0.0
+        m2 = 1.0
+        w1 = 1.0
+        w2 = 1.0
         l1 = 1.0
         l2 = 1.0
         

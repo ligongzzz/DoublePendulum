@@ -40,7 +40,6 @@ class AnimateScene: SKScene {
         
         drawLine(line: &line1, from: centerBox.position, to: firstBox.position)
         drawLine(line: &line2, from: firstBox.position, to: secondBox.position)
-        
     }
     
     override init() {
@@ -99,6 +98,7 @@ class AnimateScene: SKScene {
             timeInterval = currentTime - lastUpdateTime!;
         }
         lastUpdateTime = currentTime;
+        timeInterval = min(timeInterval, 0.1)
         
         // Update with CPP Lib
         swiftSolver.step(delta_t: timeInterval);
@@ -109,7 +109,10 @@ class AnimateScene: SKScene {
 }
 
 struct SwiftUIView: View {
-    var swiftSolver: SwiftSolver
+    @Binding var swiftSolver: SwiftSolver
+    @Binding var active: Bool
+    @Binding var zoom: Double
+    @State var spriteScene = AnimateScene(swiftSolver: SwiftSolver())
     
     func sizableScene(width: CGFloat, height: CGFloat) -> SKScene {
         let scene = AnimateScene(swiftSolver: swiftSolver)
@@ -119,14 +122,47 @@ struct SwiftUIView: View {
     }
     
     var body: some View {
+        #if targetEnvironment(macCatalyst)
         GeometryReader(content: { geometry in
-            SpriteView(scene: sizableScene(width: geometry.size.width, height: geometry.size.height))
+            SpriteView(scene: spriteScene)
+                .onAppear(perform: {
+                    spriteScene.swiftSolver = swiftSolver
+                    spriteScene.zoom = CGFloat(zoom)
+                    spriteScene.size = CGSize(width: geometry.size.width, height: geometry.size.height)
+                })
+                .onChange(of: geometry.size, perform: { value in
+                    spriteScene.size = CGSize(width: value.width, height: value.height)
+                })
+                .onChange(of: active, perform: { value in
+                    if !active {
+                        spriteScene.isPaused = true
+                    }
+                    else {
+                        spriteScene.zoom = CGFloat(zoom)
+                        spriteScene.swiftSolver = swiftSolver
+                        spriteScene.isPaused = false
+                    }
+                })
+                .onChange(of: zoom, perform: { value in
+                    spriteScene.zoom = CGFloat(zoom)
+                })
         })
-    }
-}
-
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        SwiftUIView(swiftSolver: SwiftSolver(alpha: 0.0, beta: 0.0, m1: 1.0, m2: 1.0, w1: 1.0, w2: 1.0, l1: 1.0, l2: 1.0))
+        .navigationBarHidden(true)
+        #else
+        GeometryReader(content: { geometry in
+            SpriteView(scene: spriteScene)
+                .onAppear(perform: {
+                    spriteScene.swiftSolver = swiftSolver
+                    spriteScene.zoom = CGFloat(zoom)
+                    spriteScene.size = CGSize(width: geometry.size.width, height: geometry.size.height)
+                })
+                .onChange(of: geometry.size, perform: { value in
+                    spriteScene.size = CGSize(width: value.width, height: value.height)
+                })
+                .onChange(of: zoom, perform: { value in
+                    spriteScene.zoom = CGFloat(zoom)
+                })
+        })
+        #endif
     }
 }
