@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3409CD7725F78EF1004005A6 /* AnimateScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3409CD7625F78EF1004005A6 /* AnimateScene.swift */; };
 		3464C56425F6F3810007CD3A /* __App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464C56325F6F3810007CD3A /* __App.swift */; };
 		3464C56625F6F3810007CD3A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464C56525F6F3810007CD3A /* ContentView.swift */; };
 		3464C56825F6F3820007CD3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3464C56725F6F3820007CD3A /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3409CD7625F78EF1004005A6 /* AnimateScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateScene.swift; sourceTree = "<group>"; };
 		3464C56025F6F3810007CD3A /* 双摆.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "双摆.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3464C56325F6F3810007CD3A /* __App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __App.swift; sourceTree = "<group>"; };
 		3464C56525F6F3810007CD3A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				3464C57325F6F3C50007CD3A /* 双摆-Bridging-Header.h */,
 				3464C57725F6F49F0007CD3A /* SwiftSolver.swift */,
 				3464C57A25F6F9E90007CD3A /* SwiftUIView.swift */,
+				3409CD7625F78EF1004005A6 /* AnimateScene.swift */,
 			);
 			path = "双摆";
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 			files = (
 				3464C57825F6F49F0007CD3A /* SwiftSolver.swift in Sources */,
 				3464C57525F6F3C50007CD3A /* Solver.cpp in Sources */,
+				3409CD7725F78EF1004005A6 /* AnimateScene.swift in Sources */,
 				3464C56625F6F3810007CD3A /* ContentView.swift in Sources */,
 				3464C56425F6F3810007CD3A /* __App.swift in Sources */,
 				3464C57B25F6F9E90007CD3A /* SwiftUIView.swift in Sources */,
@@ -282,7 +286,7 @@
 		3464C57025F6F3820007CD3A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "双摆/双摆.entitlements";
@@ -309,7 +313,7 @@
 		3464C57125F6F3820007CD3A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "双摆/双摆.entitlements";
