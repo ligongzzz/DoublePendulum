@@ -49,7 +49,7 @@ struct ContentView: View {
                         active = false
                     })
                     VStack{
-                        Slider(value: $zoom, in: 10.0...200.0)
+                        Slider(value: $zoom, in: 1.0...200.0)
                         Text("缩放级别: \(String(format: "%.1f", zoom))")
                             .font(.body)
                             .foregroundColor(.gray)
